@@ -1,6 +1,7 @@
-import { CreateEmployeePopup } from "@components/popups";
-import { Table } from "@components/ui";
 import { useState } from "react";
+import { CreateEmployeePopup } from "@components/popups";
+import { Table, InputField, Buttons } from "@components/ui";
+
 
 function Employees() {
     const [search, setSearch] = useState("");
@@ -39,12 +40,9 @@ function Employees() {
         {
             Header: "Actions",
             Cell: ({ row }) => (
-                <button
+                <Buttons text={"Delete"} variant={"cancel"}
                     onClick={() => handleDelete(row.original.id)}
-                    className="p-2 px-3 mr-1 text-white bg-red-500 rounded-xl hover:bg-red-600 cursor-pointer"
-                >
-                    Delete
-                </button>
+                />
             ),
         },
     ];
@@ -56,30 +54,30 @@ function Employees() {
     };
 
     const handleSaveEmployee = (newEmployee) => {
-        setEmployees([...employees, { id: employees.length + 1, ...newEmployee }]);
+        setData([...data, { id: data.length + 1, ...newEmployee }]);
     };
 
     return (
-        <div className="p-6">
+        <div className="p-3 md:p-6">
             {/* Header Section */}
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex items-center justify-between mb-4">
                 <h1 className="text-2xl font-bold">Employees</h1>
                 <button
                     onClick={() => setIsPopupOpen(true)}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md"
+                    className="p-2 text-base font-semibold text-white rounded-lg shadow-md cursor-pointer w-fit md:px-6 md:py-3 md:text-lg bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 sm:w-auto"
                 >
                     + Create Employee
                 </button>
+
             </div>
 
             {/* Search Input */}
             <div className="mb-4">
-                <input
-                    type="text"
-                    placeholder="Search employees..."
-                    value={search}
+                <InputField
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md"
+                    placeholder={"Search Employees"}
+                    type={"text"}
+                    value={search}
                 />
             </div>
 
@@ -87,8 +85,8 @@ function Employees() {
             <Table
                 columns={columns}
                 data={data}
-                pagination={pagination}
-                handlePageChange={(value) => setPage(value)}
+                pageNation={pagination}
+                handlePageNation={(value) => setPage(value)}
             />
 
             <CreateEmployeePopup

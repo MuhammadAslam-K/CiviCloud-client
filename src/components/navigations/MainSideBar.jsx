@@ -59,7 +59,7 @@ const Sidebar = () => {
                     } md:translate-x-0 md:w-72`}
             >
                 <div className="flex items-center justify-between mb-5">
-                    <h1 className="text-xl font-bold">Dashboard</h1>
+                    <h1 className="text-white primary-text">Dashboard</h1>
                     <FaTimes
                         className="text-2xl text-white cursor-pointer md:hidden"
                         onClick={() => setIsOpen(false)}

@@ -1,55 +1,60 @@
 import { useState } from "react";
+import { Buttons, InputField } from "../ui";
 
 
 function EmployeePopup({ isOpen, onClose, onSave }) {
-    const [name, setName] = useState("");
-    const [username, setUsername] = useState("");
-    const [phone, setPhone] = useState("");
+    const [formData, setFormData] = useState({
+        name: "",
+        username: "",
+        phone: "",
+    });
+
+    const handleChange = (key, value) => {
+        setFormData({
+            ...formData,
+            [key]: value,
+        });
+    };
+
 
     if (!isOpen) return null;
 
     const handleSave = () => {
-        if (name && username && phone) {
-            onSave({ name, username, phone });
-            onClose();
-            setName("");
-            setUsername("");
-            setPhone("");
-        }
+        onSave({ ...formData });
+        onClose();
+
     };
 
+    const fields = [
+        { key: 'name', label: 'Name', type: 'text', },
+        { key: 'username', label: 'Username', type: 'text', },
+        { key: 'phone', label: 'Phone Number', type: 'number', },
+    ]
+
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-80">
-                <h2 className="text-xl font-bold mb-4">Create Employee</h2>
-                <input
-                    type="text"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md mb-2"
-                />
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md mb-2"
-                />
-                <input
-                    type="text"
-                    placeholder="Phone Number"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md mb-4"
-                />
+        <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
+            <div className="p-6 bg-white rounded-lg shadow-lg w-80">
+                <h2 className="mb-4 primary-text">Create Employee</h2>
+                {fields.map((field) => (
+                    <InputField
+                        onChange={(value) => handleChange(field.key, value)}
+                        placeholder={field.label}
+                        value={formData[field.key]}
+                        type={field.type}
+                    />
+                ))}
+
                 <div className="flex justify-end">
-                    <button onClick={onClose} className="px-4 py-2 mr-2 bg-gray-400 text-white rounded-md">
-                        Cancel
-                    </button>
-                    <button onClick={handleSave} className="px-4 py-2 bg-blue-600 text-white rounded-md">
-                        Save
-                    </button>
+                    <Buttons
+                        onClick={onClose}
+                        variant={"cancel"}
+                        text={'Cancel'}
+                    />
+                    <Buttons
+                        onClick={handleSave}
+                        variant={"submit"}
+                        text={'Save'}
+                    />
                 </div>
             </div>
         </div>

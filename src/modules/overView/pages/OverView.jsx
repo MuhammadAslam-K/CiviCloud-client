@@ -18,15 +18,15 @@ function OverView() {
 
     return (
         <div className="w-full h-full min-h-screen p-4">
-            <h1 className="text-xl font-bold mt-2 md:mt-8">Today</h1>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 mt-2">
+            <h1 className="mt-2 primary-text md:mt-8">Today</h1>
+            <div className="grid grid-cols-1 gap-4 mt-2 md:grid-cols-3">
                 {todayData.map((item, index) => (
                     <OverViewCard key={index} title={item.title} value={item.value} />
                 ))}
             </div>
 
-            <h1 className="text-xl font-bold mt-8">Overview</h1>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 mt-2">
+            <h1 className="mt-8 primary-text">Overview</h1>
+            <div className="grid grid-cols-1 gap-4 mt-2 md:grid-cols-3">
                 {overviewData.map((item, index) => (
                     <OverViewCard key={index} title={item.title} value={item.value} />
                 ))}
