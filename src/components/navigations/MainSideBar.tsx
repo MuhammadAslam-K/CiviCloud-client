@@ -1,12 +1,50 @@
 import { useState } from "react";
-import { FaBars, FaHome, FaUser, FaCog, FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import {
+    FaBars, FaTimes, FaAngleDown, FaAngleUp,
+    FaHome, FaUser, FaCog
+} from "react-icons/fa";
+import { OVERVIEW } from "@routers/paths";
+
+const menuItems = [
+    {
+        title: "Home",
+        icon: <FaHome />,
+        children: [
+            { name: "Overview", path: OVERVIEW.overView },
+        ],
+    },
+    {
+        title: "Profile",
+        icon: <FaUser />,
+        children: [
+            { name: "View Profile", path: "" },
+            { name: "Edit Profile", path: "" },
+            { name: "Account Settings", path: "" }
+        ],
+    },
+    {
+        title: "Settings",
+        icon: <FaCog />,
+        children: [
+            { name: "General", path: "" },
+            { name: "Security", path: "" },
+            { name: "Notifications", path: "" }
+        ],
+    },
+];
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
+    const toggleDropdown = (title: string) => {
+        setActiveDropdown((prev) => (prev === title ? null : title));
+    };
 
     return (
         <div className="flex flex-col">
-            {/* Mobile Navbar (Fixing Hamburger Alignment) */}
+            {/* Mobile Navbar */}
             <div className="relative flex items-center justify-between w-full p-4 bg-white shadow md:hidden">
                 <button
                     className="p-2 text-white bg-gray-800 rounded"
@@ -29,23 +67,43 @@ const Sidebar = () => {
                         onClick={() => setIsOpen(false)}
                     />
                 </div>
+
+                {/* Dynamic Menu */}
                 <ul className="space-y-4">
-                    <li className="flex items-center p-2 space-x-3 rounded hover:bg-gray-700">
-                        <FaHome />
-                        <span>Home</span>
-                    </li>
-                    <li className="flex items-center p-2 space-x-3 rounded hover:bg-gray-700">
-                        <FaUser />
-                        <span>Profile</span>
-                    </li>
-                    <li className="flex items-center p-2 space-x-3 rounded hover:bg-gray-700">
-                        <FaCog />
-                        <span>Settings</span>
-                    </li>
+                    {menuItems.map((item) => (
+                        <li key={item.title} className="flex flex-col">
+                            <div
+                                className="flex items-center justify-between p-2 space-x-3 rounded cursor-pointer hover:bg-gray-700"
+                                onClick={() => toggleDropdown(item.title)}
+                            >
+                                <div className="flex items-center space-x-3">
+                                    {item.icon}
+                                    <span>{item.title}</span>
+                                </div>
+                                {item.children && (
+                                    activeDropdown === item.title ? <FaAngleUp /> : <FaAngleDown />
+                                )}
+                            </div>
+
+                            {/* Dropdown Items with Links */}
+                            {item.children && (
+                                <ul
+                                    className={`ml-8 mt-2 space-y-2 overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === item.title ? "max-h-40" : "max-h-0"
+                                        }`}
+                                >
+                                    {item.children.map((child) => (
+                                        <li key={child.name} className="p-2 rounded cursor-pointer hover:bg-gray-600">
+                                            <Link to={child.path} className="block w-full h-full">
+                                                {child.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
+                    ))}
                 </ul>
             </div>
-
-
         </div>
     );
 };
