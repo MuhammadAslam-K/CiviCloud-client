@@ -4,7 +4,7 @@ import {
     FaBars, FaTimes, FaAngleDown, FaAngleUp,
     FaHome, FaUser, FaCog
 } from "react-icons/fa";
-import { OVERVIEW } from "@routers/paths";
+import { EMPLOYEES, OVERVIEW } from "@routers/paths";
 
 const menuItems = [
     {
@@ -15,12 +15,10 @@ const menuItems = [
         ],
     },
     {
-        title: "Profile",
+        title: "Employees",
         icon: <FaUser />,
         children: [
-            { name: "View Profile", path: "" },
-            { name: "Edit Profile", path: "" },
-            { name: "Account Settings", path: "" }
+            { name: "Employees", path: EMPLOYEES.employees },
         ],
     },
     {
@@ -36,9 +34,9 @@ const menuItems = [
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+    const [activeDropdown, setActiveDropdown] = useState(null);
 
-    const toggleDropdown = (title: string) => {
+    const toggleDropdown = (title) => {
         setActiveDropdown((prev) => (prev === title ? null : title));
     };
 
