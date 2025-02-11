@@ -2,3 +2,7 @@
 export const OVERVIEW = {
     overView: '/'
 }
+
+export const EMPLOYEES = {
+    employees: '/employees'
+}

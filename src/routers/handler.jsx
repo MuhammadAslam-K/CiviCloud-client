@@ -1,22 +1,16 @@
 import React from "react";
 import { Route, Routes as RouterRoutes } from "react-router-dom";
 import { Links } from "./links";
-import SidebarNavbarLayout from "../layout/SidebarNavbarLayout"; // Import your layout component
+import SidebarNavbarLayout from "../layouts/SidebarNavbarLayout"; // Import your layout component
 
-interface RouteType {
-    name: string;
-    path: string;
-    layoutType?: string;
-    element: React.ReactNode;
-}
 
-const Layouts: Record<string, React.FC<{ children: React.ReactNode }>> = {
+const Layouts = {
     sidebar: SidebarNavbarLayout,
 };
 
 export default function Routers() {
 
-    const userAndAdminRouters: RouteType[] = [...Links];
+    const userAndAdminRouters = [...Links];
 
     return (
         <RouterRoutes>
