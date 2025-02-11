@@ -7,7 +7,7 @@ import {
 import { MdHomeWork } from "react-icons/md";
 
 import { GrUserWorker } from "react-icons/gr";
-import { EMPLOYEES, OVERVIEW } from "@routers/paths";
+import { EMPLOYEES, OVERVIEW, PROJECTS } from "@routers/paths";
 
 const menuItems = [
     {
@@ -25,12 +25,10 @@ const menuItems = [
         ],
     },
     {
-        title: "Settings",
+        title: "Projects",
         icon: <MdHomeWork />,
         children: [
-            { name: "General", path: "" },
-            { name: "Security", path: "" },
-            { name: "Notifications", path: "" }
+            { name: "Project", path: PROJECTS.project },
         ],
     },
 ];

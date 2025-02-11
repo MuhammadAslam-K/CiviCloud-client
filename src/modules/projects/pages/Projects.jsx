@@ -13,11 +13,11 @@ function Employees() {
         data: {}
     });
     const [data, setData] = useState([
-        { id: 1, name: "John Doe", userId: "john@example.com", phone: "Admin" },
-        { id: 2, name: "Jane Smith", userId: "jane@example.com", phone: "User" },
-        { id: 3, name: "Michael Johnson", userId: "michael@example.com", phone: "Editor" },
-        { id: 4, name: "Alice Brown", userId: "alice@example.com", phone: "User" },
-        { id: 5, name: "Robert Wilson", userId: "robert@example.com", phone: "Moderator" },
+        { id: 1, name: "John Doe", projectId: "john@example.com", no_of_employees: "Admin", completion: '23' },
+        { id: 2, name: "Jane Smith", projectId: "jane@example.com", no_of_employees: "User", completion: '23' },
+        { id: 3, name: "Michael Johnson", projectId: "michael@example.com", no_of_employees: "Editor", completion: '23' },
+        { id: 4, name: "Alice Brown", projectId: "alice@example.com", no_of_employees: "User", completion: '23' },
+        { id: 5, name: "Robert Wilson", projectId: "robert@example.com", no_of_employees: "Moderator", completion: '23' },
     ]);
 
     const worksArray = [
@@ -43,12 +43,16 @@ function Employees() {
             accessor: "name",
         },
         {
-            Header: "UserId",
-            accessor: "userId",
+            Header: "ProjectId",
+            accessor: "projectId",
         },
         {
-            Header: "Phone",
-            accessor: "phone",
+            Header: "No of Employees",
+            accessor: "no_of_employees",
+        },
+        {
+            Header: "Completion %",
+            accessor: "completion",
         },
         {
             Header: "Transaction",
@@ -87,10 +91,10 @@ function Employees() {
         <div className="p-3 md:p-6">
             {/* Header Section */}
             <div className="flex items-center justify-between mb-4">
-                <h1 className="text-2xl font-bold">Employees</h1>
+                <h1 className="text-2xl font-bold">Projects</h1>
                 <Buttons
                     onClick={() => setIsPopupOpen({ isOpen: true, type: 'create' })}
-                    text={"+ Create Employee"}
+                    text={"+ Create Project"}
                     variant={"transaction"}
                 />
 
@@ -100,7 +104,7 @@ function Employees() {
             <div className="mb-4">
                 <InputField
                     onChange={(e) => setSearch(e.target.value)}
-                    placeholder={"Search Employees"}
+                    placeholder={"Search Project"}
                     type={"text"}
                     value={search}
                 />

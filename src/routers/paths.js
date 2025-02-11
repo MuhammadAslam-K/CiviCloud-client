@@ -1,8 +1,12 @@
 // ========== USER`S ROUTES ==========
 export const OVERVIEW = {
-    overView: '/'
+    overView: '/',
 }
 
 export const EMPLOYEES = {
     employees: '/employees'
+}
+
+export const PROJECTS = {
+    project: '/project',
 }
