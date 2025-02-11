@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
     FaBars, FaTimes, FaAngleDown, FaAngleUp,
-    FaHome, FaUser, FaCog
+    FaHome,
 } from "react-icons/fa";
+import { MdHomeWork } from "react-icons/md";
+
+import { GrUserWorker } from "react-icons/gr";
 import { EMPLOYEES, OVERVIEW } from "@routers/paths";
 
 const menuItems = [
@@ -16,14 +19,14 @@ const menuItems = [
     },
     {
         title: "Employees",
-        icon: <FaUser />,
+        icon: <GrUserWorker />,
         children: [
             { name: "Employees", path: EMPLOYEES.employees },
         ],
     },
     {
         title: "Settings",
-        icon: <FaCog />,
+        icon: <MdHomeWork />,
         children: [
             { name: "General", path: "" },
             { name: "Security", path: "" },
