@@ -4,7 +4,8 @@ export const OVERVIEW = {
 }
 
 export const EMPLOYEES = {
-    employees: '/employees'
+    employees: '/employees',
+    employees_details: '/employees/details'
 }
 
 export const PROJECTS = {

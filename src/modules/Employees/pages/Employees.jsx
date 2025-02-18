@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { AddTransactionPopup, ConfirmationPopup, CreateEmployeePopup } from "@components/popups";
+import { ConfirmationPopup } from "@components/popups";
 import { Table, InputField, Buttons } from "@components/ui";
+import AddEmployeesTransactionPopup from "../components/AddEmployeesTransactionPopup";
+import CreateEmployeesPopup from "../components/CreateEmployeesPopup";
+import { Link } from "react-router-dom";
+import { EMPLOYEES } from "@routers/paths";
 
 
-function Employees() {
+export default function Employees() {
     const [search, setSearch] = useState("");
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [page, setPage] = useState(1);
@@ -65,9 +69,11 @@ function Employees() {
                     <Buttons text={"Delete"} variant={"cancel"}
                         onClick={() => setIsPopupOpen({ isOpen: true, type: 'delete', data: { id: row.original } })}
                     />
-                    <Buttons text={"View"} variant={"view"}
-                        onClick={() => setIsPopupOpen({ isOpen: true, type: 'delete', data: { id: row.original } })}
-                    />
+                    <Link to={EMPLOYEES.employees_details}>
+                        <Buttons text={"View"} variant={"view"}
+                            onClick={() => setIsPopupOpen({ isOpen: true, type: 'delete', data: { id: row.original } })}
+                        />
+                    </Link>
                 </>
             ),
         },
@@ -114,12 +120,6 @@ function Employees() {
                 handlePageNation={(value) => setPage(value)}
             />
 
-            <CreateEmployeePopup
-                isOpen={isPopupOpen.isOpen && isPopupOpen.type === 'create'}
-                onClose={() => setIsPopupOpen({ isOpen: false, type: '' })}
-                onSave={handleSaveEmployee}
-            />
-
             <ConfirmationPopup
                 isOpen={isPopupOpen.isOpen && isPopupOpen.type === 'delete'}
                 onClose={() => setIsPopupOpen({ isOpen: false, type: '', data: {} })}
@@ -128,7 +128,14 @@ function Employees() {
                 onConfirm={() => handleDelete(isPopupOpen.data.id)}
             />
 
-            <AddTransactionPopup
+            <CreateEmployeesPopup
+                isOpen={isPopupOpen.isOpen && isPopupOpen.type === 'create'}
+                onClose={() => setIsPopupOpen({ isOpen: false, type: '' })}
+                onSave={handleSaveEmployee}
+            />
+
+
+            <AddEmployeesTransactionPopup
                 isOpen={isPopupOpen.isOpen && isPopupOpen.type === 'transaction'}
                 onClose={() => setIsPopupOpen({ isOpen: false, type: '' })}
                 onSave={(formData) => console.log(formData)}
@@ -137,5 +144,3 @@ function Employees() {
         </div>
     );
 }
-
-export default Employees;

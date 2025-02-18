@@ -3,7 +3,7 @@ function DropdownField({ options, value, onChange }) {
         <select
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="w-full p-2 mb-2 bg-white border border-gray-300 rounded-md"
+            className="w-full p-2 mb-2 bg-white border border-gray-300 rounded-md cursor-pointer"
         >
             <option value="" disabled>Select an option</option>
             {options.map((option, index) => (

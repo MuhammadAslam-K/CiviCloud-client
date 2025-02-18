@@ -18,6 +18,8 @@ export default defineConfig({
       '@modules': path.resolve(__dirname, 'src/modules'),
       '@layouts': path.resolve(__dirname, 'src/layouts'),
       '@routers': path.resolve(__dirname, 'src/routers'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@constants': path.resolve(__dirname, 'src/constants'),
     },
   },
 });

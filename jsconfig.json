@@ -13,7 +13,13 @@
             ],
             "@routers/*": [
                 "src/routers/*"
-            ]
+            ],
+            "@utils/*": [
+                "src/utils/*"
+            ],
+            "@constants/*": [
+                "src/constants/*"
+            ],
         }
     }
 }

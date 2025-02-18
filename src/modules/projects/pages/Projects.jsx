@@ -1,23 +1,27 @@
 import { useState } from "react";
-import { AddTransactionPopup, ConfirmationPopup, CreateEmployeePopup } from "@components/popups";
-import { Table, InputField, Buttons } from "@components/ui";
+import { ConfirmationPopup, } from "@components/popups";
+import { Table, InputField, Buttons, DropdownField } from "@components/ui";
+import { capitalize } from "@utils/textModifier";
+import CreateProjectPopup from "../components/CreateProjectPopup";
+import AddProjectTransactionPopup from "../components/AddProjectTransactionPopup";
 
 
 function Employees() {
     const [search, setSearch] = useState("");
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [page, setPage] = useState(1);
+    const [activeTab, setActiveTab] = useState('ongoing');
     const [isPopupOpen, setIsPopupOpen] = useState({
         type: '',
         isOpen: false,
         data: {}
     });
     const [data, setData] = useState([
-        { id: 1, name: "John Doe", projectId: "john@example.com", no_of_employees: "Admin", completion: '23' },
-        { id: 2, name: "Jane Smith", projectId: "jane@example.com", no_of_employees: "User", completion: '23' },
-        { id: 3, name: "Michael Johnson", projectId: "michael@example.com", no_of_employees: "Editor", completion: '23' },
-        { id: 4, name: "Alice Brown", projectId: "alice@example.com", no_of_employees: "User", completion: '23' },
-        { id: 5, name: "Robert Wilson", projectId: "robert@example.com", no_of_employees: "Moderator", completion: '23' },
+        { id: 1, name: "John Doe", projectId: "john@example.com", no_of_employees: "Admin", status: '23' },
+        { id: 2, name: "Jane Smith", projectId: "jane@example.com", no_of_employees: "User", status: '23' },
+        { id: 3, name: "Michael Johnson", projectId: "michael@example.com", no_of_employees: "Editor", status: '23' },
+        { id: 4, name: "Alice Brown", projectId: "alice@example.com", no_of_employees: "User", status: '23' },
+        { id: 5, name: "Robert Wilson", projectId: "robert@example.com", no_of_employees: "Moderator", status: '23' },
     ]);
 
     const worksArray = [
@@ -51,8 +55,16 @@ function Employees() {
             accessor: "no_of_employees",
         },
         {
-            Header: "Completion %",
-            accessor: "completion",
+            Header: "Status",
+            Cell: ({ row }) => (
+                <div className="w-28 md:w-32">
+                    <DropdownField
+                        onChange={(value) => console.log('value', value)}
+                        options={worksArray.map((work) => ({ value: work.id, label: work.name }))}
+                        value={'1'}
+                    />
+                </div>
+            ),
         },
         {
             Header: "Transaction",
@@ -110,18 +122,28 @@ function Employees() {
                 />
             </div>
 
+            <div className="mb-4">
+                <div className="flex space-x-4 border-b border-gray-300">
+                    {['ongoing', 'completed', 'not_started'].map((status) => (
+
+                        <button
+                            className={`px-4 cursor-pointer py-2 font-medium rounded-t-md transition ${activeTab === status ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"
+                                }`}
+                            onClick={() => setActiveTab(status)}
+                        >
+                            {capitalize(status)}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+
             {/* Employees Table */}
             <Table
                 columns={columns}
                 data={data}
                 pageNation={pagination}
                 handlePageNation={(value) => setPage(value)}
-            />
-
-            <CreateEmployeePopup
-                isOpen={isPopupOpen.isOpen && isPopupOpen.type === 'create'}
-                onClose={() => setIsPopupOpen({ isOpen: false, type: '' })}
-                onSave={handleSaveEmployee}
             />
 
             <ConfirmationPopup
@@ -132,11 +154,16 @@ function Employees() {
                 onConfirm={() => handleDelete(isPopupOpen.data.id)}
             />
 
-            <AddTransactionPopup
+            <CreateProjectPopup
+                isOpen={isPopupOpen.isOpen && isPopupOpen.type === 'create'}
+                onClose={() => setIsPopupOpen({ isOpen: false, type: '' })}
+                onSave={handleSaveEmployee}
+            />
+
+            <AddProjectTransactionPopup
                 isOpen={isPopupOpen.isOpen && isPopupOpen.type === 'transaction'}
                 onClose={() => setIsPopupOpen({ isOpen: false, type: '' })}
                 onSave={(formData) => console.log(formData)}
-                works={worksArray}
             />
         </div>
     );
