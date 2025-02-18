@@ -7,10 +7,11 @@ const OverView = lazy(() => import("@modules/overView/pages/OverView"));
 
 // ========== EMPLOYEES ==========
 const Employees = lazy(() => import("@modules/Employees/pages/Employees"));
-const ViewDetails = lazy(() => import("@modules/Employees/pages/ViewDetails"));
+const EmployeeDetailView = lazy(() => import("@modules/Employees/pages/ViewDetails"));
 
 // ========== PROJECTS ==========
 const Projects = lazy(() => import("@modules/projects/pages/Projects"));
+const ProjectDetailView = lazy(() => import("@modules/projects/pages/ViewDetails"));
 
 export const Links = [
 
@@ -32,7 +33,7 @@ export const Links = [
         name: "Employees Details Page",
         layoutType: LAYOUT_TYPES.sidebar,
         path: EMPLOYEES.employees_details,
-        element: <ViewDetails />
+        element: <EmployeeDetailView />
     },
 
     // ========== PROJECTS ==========
@@ -41,5 +42,11 @@ export const Links = [
         layoutType: LAYOUT_TYPES.sidebar,
         path: PROJECTS.project,
         element: <Projects />
+    },
+    {
+        name: "Project Management Page",
+        layoutType: LAYOUT_TYPES.sidebar,
+        path: PROJECTS.project_details,
+        element: <ProjectDetailView />
     },
 ]

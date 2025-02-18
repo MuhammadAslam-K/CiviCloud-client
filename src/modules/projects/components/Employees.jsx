@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { ConfirmationPopup } from "@components/popups";
 import { Table, InputField, Buttons } from "@components/ui";
-import AddEmployeesTransactionPopup from "../components/AddEmployeesTransactionPopup";
-import CreateEmployeesPopup from "../components/CreateEmployeesPopup";
 import { Link } from "react-router-dom";
 import { EMPLOYEES } from "@routers/paths";
+import AddEmployeesTransactionPopup from "@modules/Employees/components/AddEmployeesTransactionPopup";
 
 
 export default function Employees() {
@@ -66,8 +65,8 @@ export default function Employees() {
             Header: "Actions",
             Cell: ({ row }) => (
                 <>
-                    <Buttons text={"Delete"} variant={"cancel"}
-                        onClick={() => setIsPopupOpen({ isOpen: true, type: 'delete', data: { id: row.original } })}
+                    <Buttons text={"Remove"} variant={"cancel"}
+                        onClick={() => setIsPopupOpen({ isOpen: true, type: 'remove', data: { id: row.original } })}
                     />
                     <Link to={EMPLOYEES.employees_details}>
                         <Buttons text={"View"} variant={"view"} />
@@ -92,12 +91,6 @@ export default function Employees() {
             {/* Header Section */}
             <div className="flex items-center justify-between mb-4">
                 <h1 className="text-2xl font-bold">Employees</h1>
-                <Buttons
-                    onClick={() => setIsPopupOpen({ isOpen: true, type: 'create' })}
-                    text={"+ Create Employee"}
-                    variant={"transaction"}
-                />
-
             </div>
 
             {/* Search Input */}
@@ -119,17 +112,11 @@ export default function Employees() {
             />
 
             <ConfirmationPopup
-                isOpen={isPopupOpen.isOpen && isPopupOpen.type === 'delete'}
+                isOpen={isPopupOpen.isOpen && isPopupOpen.type === 'remove'}
                 onClose={() => setIsPopupOpen({ isOpen: false, type: '', data: {} })}
-                title={"Delete Employee"}
-                message={`Are you sure you want to delete ${isPopupOpen.isOpen && isPopupOpen.type === 'delete' && isPopupOpen.data.id.name}?`}
+                title={"Remove Employee"}
+                message={`Are you sure you want to remove ${isPopupOpen.isOpen && isPopupOpen.type === 'remove' && isPopupOpen.data.id.name} from this project ?`}
                 onConfirm={() => handleDelete(isPopupOpen.data.id)}
-            />
-
-            <CreateEmployeesPopup
-                isOpen={isPopupOpen.isOpen && isPopupOpen.type === 'create'}
-                onClose={() => setIsPopupOpen({ isOpen: false, type: '' })}
-                onSave={handleSaveEmployee}
             />
 
 

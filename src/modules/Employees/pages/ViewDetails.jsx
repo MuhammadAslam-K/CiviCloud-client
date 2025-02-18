@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { OverViewCard } from '@components/cards'
+import { OverViewCard, TransactionsDetails } from '@components/cards'
 import { Buttons } from '@components/ui';
 import AddEmployeesTransactionPopup from '../components/AddEmployeesTransactionPopup';
-import EmployeeTransactions from '../components/TransactionDetails';
+import Projects from '../components/Projects';
 
 
 function ViewDetails() {
@@ -51,8 +51,10 @@ function ViewDetails() {
             </div>
 
             <div className="mt-5">
-                <EmployeeTransactions />
+                <TransactionsDetails module={'Employee'} />
             </div>
+
+            <Projects />
 
             {/* POPUPS */}
             <AddEmployeesTransactionPopup

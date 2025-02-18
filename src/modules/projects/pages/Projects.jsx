@@ -4,9 +4,11 @@ import { Table, InputField, Buttons, DropdownField } from "@components/ui";
 import { capitalize } from "@utils/textModifier";
 import CreateProjectPopup from "../components/CreateProjectPopup";
 import AddProjectTransactionPopup from "../components/AddProjectTransactionPopup";
+import { Link } from "react-router-dom";
+import { PROJECTS } from "@routers/paths";
 
 
-function Employees() {
+export default function Projects() {
     const [search, setSearch] = useState("");
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [page, setPage] = useState(1);
@@ -81,9 +83,9 @@ function Employees() {
                     <Buttons text={"Delete"} variant={"cancel"}
                         onClick={() => setIsPopupOpen({ isOpen: true, type: 'delete', data: { id: row.original } })}
                     />
-                    <Buttons text={"View"} variant={"view"}
-                        onClick={() => setIsPopupOpen({ isOpen: true, type: 'delete', data: { id: row.original } })}
-                    />
+                    <Link to={PROJECTS.project_details}>
+                        <Buttons text={"View"} variant={"view"} />
+                    </Link>
                 </>
             ),
         },
@@ -168,5 +170,3 @@ function Employees() {
         </div>
     );
 }
-
-export default Employees;

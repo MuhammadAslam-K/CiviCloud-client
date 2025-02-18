@@ -10,4 +10,5 @@ export const EMPLOYEES = {
 
 export const PROJECTS = {
     project: '/project',
+    project_details: '/project/details',
 }
