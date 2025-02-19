@@ -48,7 +48,7 @@ function ViewDetails() {
                     </h1>
                 </div>
 
-                <div className="">
+                <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
                     <Buttons
                         onClick={() => setIsPopupOpen({ isOpen: true, type: 'transaction' })}
                         text={"+ Add Transaction"}
@@ -63,6 +63,7 @@ function ViewDetails() {
                         className="w-full sm:w-auto"
                     />
                 </div>
+
             </div>
 
 

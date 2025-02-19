@@ -40,26 +40,37 @@ export default function EmployeeTransactions({ module }) {
             {/* Heading and Create PDF Button */}
             <div className="flex flex-col mb-4 sm:flex-row sm:items-center sm:justify-between">
                 <h2 className="text-xl font-semibold text-gray-800 sm:text-2xl">{module} Transactions</h2>
-                <Button onClick={"#"} text={"Create PDF"} variant={"submit"} />
             </div>
 
             {/* Date Filters */}
-            <div className="flex flex-col gap-3 mb-4 sm:flex-row">
-                <input
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    className="p-2 border rounded-md"
-                    placeholder="Start Date"
-                />
-                <input
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    className="p-2 border rounded-md"
-                    placeholder="End Date"
-                />
+            <div className="flex flex-col gap-3 mb-4 sm:flex-row sm:items-center sm:justify-between">
+                {/* Date Filters */}
+                <div className="flex flex-col w-full gap-3 sm:flex-row">
+                    <div className="flex flex-col w-full sm:w-auto">
+                        <label className="mb-1 text-sm font-medium text-gray-700">Start Date</label>
+                        <input
+                            type="date"
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                            className="w-full p-2 border rounded-md sm:w-44"
+                        />
+                    </div>
+                    <div className="flex flex-col w-full sm:w-auto">
+                        <label className="mb-1 text-sm font-medium text-gray-700">End Date</label>
+                        <input
+                            type="date"
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                            className="w-full p-2 border rounded-md sm:w-44"
+                        />
+                    </div>
+                </div>
+
+                {/* Create PDF Button */}
+                {module === "Employee" && <Button onClick={"#"} text={"Mark Paid"} variant={"transaction"} additionalClass={"px-6"} />}
+                <Button onClick={"#"} text={"Create PDF"} variant={"submit"} additionalClass={"px-6"} />
             </div>
+
 
             {/* Transactions List */}
             <div className="space-y-3">

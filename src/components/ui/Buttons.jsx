@@ -1,4 +1,4 @@
-function Button({ onClick, text, variant = "submit" }) {
+function Button({ onClick, text, variant = "submit", additionalClass }) {
     const baseStyles = "px-4 py-2 rounded-md transition-colors";
 
     const variants = {
@@ -9,7 +9,7 @@ function Button({ onClick, text, variant = "submit" }) {
     };
 
     return (
-        <button onClick={onClick} className={`${baseStyles} ${variants[variant]} mx-1 cursor-pointer`}>
+        <button onClick={onClick} className={`${baseStyles} ${additionalClass} ${variants[variant]} mx-1 cursor-pointer`}>
             {text}
         </button>
     );
